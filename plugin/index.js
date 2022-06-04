@@ -3,6 +3,7 @@ const propertiesOrderRule = require('stylelint-order/rules/properties-order');
 const configCreator = require('../config/configCreator');
 
 const ruleName = 'plugin/rational-order';
+const propertiesOrderRuleName = propertiesOrderRule.ruleName;
 
 module.exports = stylelint.createPlugin(
   ruleName,
@@ -27,6 +28,12 @@ module.exports = stylelint.createPlugin(
     if (!enabled || !validOptions) {
       return;
     }
+
+    const resultStylelint = postcssResult.stylelint;
+    resultStylelint.ruleSeverities[propertiesOrderRuleName] = resultStylelint.ruleSeverities[ruleName];
+    resultStylelint.customMessages[propertiesOrderRuleName] = resultStylelint.customMessages[ruleName];
+    resultStylelint.ruleMetadata[propertiesOrderRuleName] = resultStylelint.ruleMetadata[ruleName];
+
     const expectation = configCreator(options);
     propertiesOrderRule(
       expectation,

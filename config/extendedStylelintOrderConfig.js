@@ -8,7 +8,6 @@ module.exports = ({
 } = {}) => ({
   plugins: ['stylelint-order', path.join(__dirname, '../plugin')],
   rules: {
-    'order/properties-order': [],
     'property-no-unknown': [
       true,
       {
